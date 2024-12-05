@@ -1,0 +1,12 @@
+project:
+  type: website
+  output-dir: out
+  resources:
+    - style/fonts/*
+    - assets/*
+  render:
+    - data/analysis.qmd
+    - index.qmd
+
+execute:
+  freeze: auto

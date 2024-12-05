@@ -1,0 +1,98 @@
+---
+format:
+  revealjs: 
+    theme: [default, style/style.scss]
+    highlight-style: github
+    width: 1400
+    fig-width: 15
+---
+
+## Title here {.hleft .center style="font-size: 150%;"}
+
+### And a subtitle
+
+James Goldie
+
+# Hi! {#section-aqua}
+
+## A bit about me
+
+# Storytelling fundamentals
+
+## Audience, message and medium
+
+## Audience
+
+## Message
+
+## Medium
+
+## Anything else?
+
+# Using Quarto for storytelling
+
+## What is Quarto?
+
+# Example 1<br>Telling stories with graphics
+
+## Example 1
+
+Your data is **electricity demand** and **temperature** at **3 inner Melbourne sites**:
+
+
+:::{style="font-size: 48%;"}
+```{ojs}
+powerTemp = FileAttachment("data/power-temperature-threesites.csv").csv({ typed: true })
+
+Inputs.table(powerTemp)
+```
+:::
+
+## A basic chart
+
+```{r}
+#| library: slides-setup
+library(tidyverse)
+library(here)
+```
+
+```{r}
+#| label: basic-chart
+power_temp <- read_csv(here("data", "power-temperature-threesites.csv"))
+
+ggplot(power_temp) +
+  aes(x = tmax, y = demand, colour = working) +
+  geom_point(size = 2) +
+  facet_wrap(vars(name)) +
+  labs(
+    x = "2m air temperature [°C]",
+    y = "Electricity demand [MW]",
+    title = "Electricity and temperature")
+```
+
+What stories could we tell with this data?
+
+What improvements could we make?
+
+# Scrollytelling with Closeread
+
+# Example 2<br>Using Closeread
+
+# Wrapup {#section-carbon}
+
+## Use Closeread, win prizes
+
+Andrew Bray (my collaborator on Closeread) and I have teamed up with data science company **Posit** to run the **Closeread Prize**.
+
+https://posit.co/blog/closeread-prize-announcement
+
+Entries close Jan 5th  
+[(we just extended the contest!)]{.small .deemph}
+
+## Thanks! Questions?
+
+{{< iconify fa6-brands:bluesky >}} [@jamesgoldie.dev](https://bsky.app/profile/jamesgoldie.dev)
+
+{{< iconify bi:mastodon >}} [@jimjamslam@aus.social](https://aus.social/@jimjamslam@aus.social)
+
+{{< iconify bi:linkedin >}} [linkedin.com/in/jamesgoldie](https://www.linkedin.com/in/jamesgoldie)
