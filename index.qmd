@@ -4,7 +4,7 @@ format:
     theme: [default, style/style.scss]
     highlight-style: github
     width: 1400
-    fig-width: 15
+    fig-width: 10
 ---
 
 ## Title here {.hleft .center style="font-size: 150%;"}
@@ -15,30 +15,37 @@ James Goldie
 
 # Hi! {#section-aqua}
 
-## A bit about me
+# Storytelling fundamentals {#section-sunset}
 
-# Storytelling fundamentals
+## Audience, message and medium {.center}
 
-## Audience, message and medium
+## Audience {.center}
 
-## Audience
+## Message {.center}
 
-## Message
+## Medium {.center}
 
-## Medium
-
-## Anything else?
-
-# Using Quarto for storytelling
+# Using Quarto for storytelling {#section-moss}
 
 ## What is Quarto?
 
-# Example 1<br>Telling stories with graphics
+::: {.columns}
+::: {.column}
+![The source text of a Quarto document](assets/quarto-doc-source.png){alt="The source text of a Quarto document"}
+:::
+::: {.column}
+![The visual editor's view of a Quarto document](assets/quarto-doc-visual.png){alt="The visual editor's view of a Quarto document"}
+:::
+:::
 
 ## Example 1
 
 Your data is **electricity demand** and **temperature** at **3 inner Melbourne sites**:
 
+[**github.com/jimjam-slam/talk-storytelling-r-quarto/\
+blob/main/data/power-temperature-threesites.csv**](https://github.com/jimjam-slam/talk-storytelling-r-quarto/blob/main/data/power-temperature-threesites.csv)
+
+\
 
 :::{style="font-size: 48%;"}
 ```{ojs}
@@ -54,11 +61,15 @@ Inputs.table(powerTemp)
 #| library: slides-setup
 library(tidyverse)
 library(here)
+power_temp <- read_csv(here("data", "power-temperature-threesites.csv"))
 ```
 
+:::{style="font-size: 85%;"}
 ```{r}
 #| label: basic-chart
-power_temp <- read_csv(here("data", "power-temperature-threesites.csv"))
+#| id: basic-chart
+#| echo: true
+#| output-location: column
 
 ggplot(power_temp) +
   aes(x = tmax, y = demand, colour = working) +
@@ -69,30 +80,203 @@ ggplot(power_temp) +
     y = "Electricity demand [MW]",
     title = "Electricity and temperature")
 ```
+:::
 
 What stories could we tell with this data?
 
 What improvements could we make?
 
-# Scrollytelling with Closeread
+## Use Quarto to explore this data
 
-# Example 2<br>Using Closeread
+:::: {.columns}
+::: {.column}
+
+##### R script
+
+````{.r}
+library(tidyverse)
+
+ggplot(data) +
+  aes() +
+  # ...
+````
+:::
+::: {.column}
+
+##### R code chunk in Quarto doc
+
+````
+---
+title: "Power and temperature"
+---
+
+Let's look at this data!
+
+```{{r}}
+library(tidyverse)
+
+ggplot(data) +
+  aes() +
+  # ...
+```
+````
+
+:::
+::::
+
+# Scrollytelling with Closeread {#section-indigo}
+
+## What's scrollytelling?
+
+Scrollytelling involves **graphics that stick** to the screen and and **change as the user scrolls**.
+
+::: {.columns .small}
+::: {.column}
+![ABC scrollytelling story on fake AI imagery](assets/scrollytelling-abc-480p.mov){alt="Video of a scrollytelling story by the ABC on fake AI imagery" autoplay="true" loop="true"}
+:::
+::: {.column}
+![New York Times scrollytelling story on \"Shah Jahan on a terrace, holding a pendant set with his portrait\" by Chitarman](assets/scrollytelling-nyt-480p.mov){alt="Video of a scrollytelling story by the New York Times on \"Shah Jahan on a terrace, holding a pendant set with his portrait\" by Chitarman" autoplay="true" loop="true"}
+:::
+:::
+
+## Closeread: scrollytelling with Quarto {.center}
+
+[**Closeread**](https://closeread.dev) is a Quarto extension developed by Andrew Bray  
+and James Goldie (me!)
+
+[(We named it after a [**New York Times series**](https://www.nytimes.com/interactive/2021/arts/close-read.html) — the piece in the last slide was from this series!)]{.small .deemph}
+
+Closeread lets you turn a regular Quarto doc into a scrollytelling doc
+
+## How Closeread works {.center}
+
+\
+
+:::: {.columns .small}
+::: {.column width="47.5%"}
+##### Step 1
+
+A Quarto extension is like an R package — it extends Quarto's abilities.
+
+Install Closeread in the RStudio Terminal by running:
+
+```bash
+quarto add qmd-lab/closeread
+```
+
+\
+
+##### Step 2
+
+At the top of your Quarto doc, change  
+`format: html` → `format: closeread-html`
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="47.5%"}
+##### Step 3
+Tell Quarto where the scrollytelling starts and stops:
+
+\
+
+````
+:::{.cr-section}
+
+(scrollytelling stuff goes here!)
+
+:::
+````
+
+:::
+::::
+
+## How Closeread works {.center}
+
+Closeread has two components: **stickies** and **triggers**.
+
+\
+
+::: {.columns .small}
+::: {.column}
+
+##### Stickies
+
+Things you want to stick on the screen. Give them an ID starting with `#cr-`.
+
+````
+:::{#cr-myplot}
+
+```{{r}}
+ggplot(mydata) +
+ aes(x = x, y = y) +
+ geom_point()
+```
+
+:::
+````
+
+:::
+::: {.column}
+
+##### Triggers
+
+These make the stickies appear. They work like citations: use the ID of the sticky with an `@`:
+
+````
+When this text scrolls past, my great figure will appear! @cr-myplot
+````
+
+:::
+:::
+
+## How can scrollytelling help my communication? {.hleft}
+
+::: {.columns .small}
+::: {.column width="30%"}
+Here's a Closeread example where we **build a plot up** one layer at a time:
+
+[**closeread.dev/\
+gallery/demos/\
+build-up-plots/**](https://closeread.dev/gallery/demos/build-up-plots/)
+
+\
+
+How can we use this technique with our electricity and temperature data?
+:::
+::: {.column width="5%"}
+:::
+::: {.column width="65%"}
+
+```{=html}
+<iframe
+  src="https://closeread.dev/gallery/demos/build-up-plots/"
+  style="height: 650px; width: 900px; border: 1px solid lightgrey; border-radius: 0.5em;"></iframe>
+```
+
+:::
+:::
 
 # Wrapup {#section-carbon}
 
-## Use Closeread, win prizes
+## Use Closeread, win prizes {.center}
+
+\
 
 Andrew Bray (my collaborator on Closeread) and I have teamed up with data science company **Posit** to run the **Closeread Prize**.
 
-https://posit.co/blog/closeread-prize-announcement
+\
+
+[**posit.co/blog/closeread-prize-announcement**](https://posit.co/blog/closeread-prize-announcement)
+
+\
 
 Entries close Jan 5th  
 [(we just extended the contest!)]{.small .deemph}
 
-## Thanks! Questions?
+## Thanks! Questions? {.center}
 
-{{< iconify fa6-brands:bluesky >}} [@jamesgoldie.dev](https://bsky.app/profile/jamesgoldie.dev)
+{{< iconify fa6-brands:bluesky >}} [**@jamesgoldie.dev**](https://bsky.app/profile/jamesgoldie.dev)
 
-{{< iconify bi:mastodon >}} [@jimjamslam@aus.social](https://aus.social/@jimjamslam@aus.social)
+{{< iconify bi:mastodon >}} [**@jimjamslam@aus.social**](https://aus.social/@jimjamslam@aus.social)
 
-{{< iconify bi:linkedin >}} [linkedin.com/in/jamesgoldie](https://www.linkedin.com/in/jamesgoldie)
+{{< iconify bi:linkedin >}} [**linkedin.com/in/jamesgoldie**](https://www.linkedin.com/in/jamesgoldie)
