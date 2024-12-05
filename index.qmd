@@ -7,23 +7,100 @@ format:
     fig-width: 10
 ---
 
-## Title here {.hleft .center style="font-size: 150%;"}
-
-### And a subtitle
+## Telling stories with data {.hleft .center style="font-size: 150%;"}
 
 James Goldie
 
 # Hi! {#section-aqua}
 
+## {.center}
+
+Climate researcher
+
+↓
+
+Data journalist
+
 # Storytelling fundamentals {#section-sunset}
 
-## Audience, message and medium {.center}
+## Audience, medium and message {.center}
 
 ## Audience {.center}
 
-## Message {.center}
+Do they have **specialist training?** (In _your_ field, or another?)
+
+What are their **wants and worries?**
 
 ## Medium {.center}
+
+:::: {.columns}
+::: {.column width="47.5%"}
+![Credit: [MCCCRH](https://monash.edu/mcccrh)](assets/mcccrh-obs.jpg){alt="Map of South Australia, with the long term warming trends of several locations labelled"}
+:::
+::: {.column width="5%"}
+vs.
+:::
+::: {.column width="47.5%"}
+![Credit: [Abhijith S Nair/Unsplash](https://unsplash.com/photos/woman-reading-newspaper-AvKsX5ZOQnA)](assets/newspaper.jpg){alt="Woman reading broadsheet newspaper"}
+:::
+::::
+
+## Medium {.center}
+
+Where will people encounter your work?
+
+How long will they have to consider it?
+
+Did they seek it out?
+
+## Message {.center}
+
+## What will your readers see first? {.center}
+
+This is called **visual hierarchy**.
+
+\
+
+What did you see first on this slide? What did you see second?
+
+Why?
+
+## {.center}
+
+When all of the elements on your plot look the same, it's really hard for people to decide what to focus on. Without that focus, it's difficult for your plot to lead to a conclusion. Instead, you want to vary your plot elements, drawing attention to the most important things first. There are lots of ways to do this: bolding text, making it bigger, using colours, and taking advantage of natural reading direction can all help to establish visual hierarchy.
+
+## {.center}
+
+When all of the elements on your plot **look the same**, it's **really hard for people** to decide what to focus on.
+
+\
+
+Without that focus, it's difficult for your plot to lead to a conclusion.
+
+\
+
+Instead, you want to **vary your plot elements**, drawing attention to the **most important things** first.
+
+## {.center}
+
+There are lots of ways to do this:
+
+::::{.columns .small}
+:::{.column width="30%"}
+**bolding text**  
+[**making it bigger**]{style="font-size:125%"}<br>
+:::
+:::{.column width="30%"}
+[**using striking colours...**]{style="color: #dd0033"}<br>
+[... or softer colours]{style="color: #bbbbbb"}
+:::
+
+:::{.column width="30%"}
+**taking advantage of natural reading direction** 
+:::
+::::
+
+These techniques can all **help establish visual hierarchy.**
 
 # Using Quarto for storytelling {#section-moss}
 
