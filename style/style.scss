@@ -1,0 +1,107 @@
+/*-- scss:defaults --*/
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/style/fonts/Inter-Light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/style/fonts/Inter-LightItalic.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/style/fonts/Inter-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: Inter;
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/style/fonts/Inter-BoldItalic.woff2") format("woff2");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,700;1,300;1,700&display=swap');
+
+$font-family-sans-serif: "Inter", Helvetica, sans-serif !default;
+$font-family-monospace: "JetBrains Mono", monospace !default;
+$presentation-heading-font: "DM Serif Text", serif !default;
+
+// $name,  $color1,  $color2,  $body-color
+$section-styles:
+  "aqua"   "#00aadd" "#66dd00" "#16365a",
+  "sunset" "#c21500" "#ffc500" "#4b1625",
+  "moss"   "#134E5E" "#71B280" "#0b2c36",
+  "indigo" "#4776E6" "#8E54E9" "#152447",
+  "carbon" "#222222" "#444444" "#222222";
+
+@debug "Section styles: #{$section-styles}";
+
+/*-- scss:rules --*/
+
+.reveal {
+
+  // this block will repeat for each of our section-styles above
+
+  @each $name, $color1, $color2, $body-color in $section-styles {
+
+    // anything in here will cover the whole section
+    // that uses this identifier
+
+    section.stack:has(#section-#{$name}) {
+
+      p, li {
+        color: #{$body-color};
+      }
+
+      h1, h2, h3 {
+        background: linear-gradient(45deg, #{$color1}, #{$color2});
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+    }
+
+  }
+
+  .small {
+    font-size: 70%;
+  }
+  .deemph {
+    opacity: 75%;
+  }
+
+  /* text alignment */
+
+  .slide.hcenter {
+    text-align: center;
+  }
+
+  .slide.hleft {
+    text-align: left;
+  }
+
+  .slide.hright {
+    text-align: right;
+  }
+
+  // center content slides by default
+  .level2 {
+    text-align: center;
+  }
+
+}
