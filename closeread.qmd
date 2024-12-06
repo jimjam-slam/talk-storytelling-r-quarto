@@ -1,0 +1,74 @@
+---
+title: "My amazing report 😎"
+format: closeread-html
+editor: visual
+---
+
+### Setup
+
+Let's load the libraries and load our data. We'll call the data set `power_temp`:
+
+```{r}
+library(tidyverse)
+power_temp <- read_csv("power-temperature-threesites.csv")
+```
+
+::::: cr-section
+## The U-curve
+
+Demand for electricity is lower on mild days (in the middle) and higher on cold or hot (left or right) days. Here's an example of one site, the Dock Area: @cr-onesite
+
+::: {#cr-onesite}
+```{r}
+power_temp |>
+  filter(site == "DA") |>
+  ggplot() +
+    aes(x = tmax, y = demand, colour = working) +
+    geom_point(size = 2) +
+    facet_wrap(vars(name)) +
+    scale_colour_manual(values = c(
+      "Weekday" = "#880000",
+      "Weekend" = "#00ccff"
+    )) +
+    scale_x_continuous(labels = scales::label_number(suffix = " °C")) +
+    scale_y_continuous(labels = scales::label_number(suffix = " MW")) +
+    theme(plot.title = element_text(size = rel(1.5))) +
+    labs(
+      x = "Daily temperature peak",
+      y = "Electricity demand",
+      title = "Electricity and temperature",
+      subtitle = "People use less electricity on mild days, when it's\nnot too hot and not too cold."
+      )
+```
+:::
+
+In fact, we see this relationship in most places. Here are two others: @cr-threesites
+
+::: {#cr-threesites}
+```{r}
+ggplot(power_temp) +
+  aes(x = tmax, y = demand, colour = working) +
+  geom_point(size = 2) +
+  facet_wrap(vars(name)) +
+  scale_colour_manual(values = c(
+    "Weekday" = "#880000",
+    "Weekend" = "#00ccff"
+  )) +
+  scale_x_continuous(labels = scales::label_number(suffix = " °C")) +
+  scale_y_continuous(labels = scales::label_number(suffix = " MW")) +
+  theme(plot.title = element_text(size = rel(1.5))) +
+  labs(
+    x = "Daily temperature peak",
+    y = "Electricity demand",
+    title = "Electricity and temperature",
+    subtitle = "People use less electricity on mild days, when it's\nnot too hot and not too cold."
+    )
+```
+:::
+
+But there are some interesting differences between sites too: @cr-threesites
+
+-   In Port Melbourne, we see demand fall substantially on [weekends]{style="background-color: #00ccff; color: white;"} (in blue) compared to [weekdays]{style="background-color: #880000; color: white;"} (red). This doesn't happen as much at the two other sites. @cr-threesites
+
+-   In Northcote, electricity demand increases much more at extreme temperatures than other sites.
+:::::
